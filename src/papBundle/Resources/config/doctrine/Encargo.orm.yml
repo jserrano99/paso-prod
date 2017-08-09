@@ -1,0 +1,35 @@
+papBundle\Entity\Encargo:
+    type: entity
+    table: encargo
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        numero:
+            type: integer
+            nullable: true
+            options:
+                unsigned: false
+        titulo:
+            type: string 
+            nullable: true
+            length: 255
+        comentario:
+            type: text
+            nullable: true
+            length: 65535
+            options:
+                fixed: false
+    oneToMany:
+        PasoProdEncargo:
+            targetEntity: PasoProdEncargo 
+            mappedBy: encargo
+            cascade: ["persist"]
+                    
+    lifecycleCallbacks: {  }

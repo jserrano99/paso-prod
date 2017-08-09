@@ -1,0 +1,43 @@
+{% extends "papBundle::layout.html.twig" %} 
+{% block titulo %} INVENTARIO DE ELEMENTOS {% endblock %}
+{% block contenido %}
+    <div class="container">
+        {% for message in app.session.flashbag().get('status') %}
+            <div class="alert alert-success">
+                {{message}}
+            </div>
+        {% endfor %}
+        <a href="{{path("insertElemento")}}" class="btn btn-success">Añadir</a>
+        <table class="tabla table" border="1">
+            <thead>
+                <tr class="success">
+                    <th class="text-center text-bold" >ID</th>
+                    <th class="text-center text-bold">Nombre</th>
+                    <th class="text-center text-bold">Modulo</th>
+                    <th class="text-center text-bold">Path</th>
+                    <th class="text-center text-bold">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for elemento in elementos %}
+                    <tr>
+                        <td class="text-center">{{elemento.id}}</td>
+                        <td>{{elemento.nombre}}</td>
+                        {% if elemento.modulo.texto is defined %}
+                            <td>{{elemento.modulo.texto}}</td>
+                        {% else %}
+                            <td></td>
+                        {% endif %}
+                        <td>{{elemento.path}}</td>
+                        <td class="text-center">
+                            <a href="{{path("updateElemento",{ "id":elemento.id })}}" class="btn btn-warning">Editar</a>
+                            <a href="{{path("deleteElemento",{ "id":elemento.id })}}" class="btn btn-danger">Eliminar</a>
+                            <a href="{{path("verElementoPaso",{ "id":elemento.id })}}" class="btn btn-success">Ver Pasos</a>
+                        </td>
+                        
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

@@ -1,0 +1,26 @@
+papBundle\Entity\Parametro:
+    type: entity
+    table: parametro
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        nombre:
+            type: string
+            nullable: false
+            length: 15
+            options:
+                fixed: false
+        valor:
+            type: string
+            nullable: false
+            length: 255
+            options:
+                fixed: false
+    lifecycleCallbacks: {  }

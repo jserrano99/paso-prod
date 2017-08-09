@@ -1,0 +1,97 @@
+{% extends "papBundle::layout.html.twig" %} 
+{% block titulo %} AÑADIR ELEMENTOS AL PASO A PRODUCCIÓN{% endblock %}
+{% block contenido %}
+    <div class="container">
+        {% for message in app.session.flashbag().get('status') %}
+            <div class="alert alert-success">
+                {{message}}
+            </div>
+        {% endfor %}
+        <div class="container">
+            <h4>{{'DATOS DEL PASO A PRODUCCIÓN '}} {{'Identificador: '}}{{PasoProd.id}}{{' Fecha: '}}{{PasoProd.fecha|date('d-m-Y')}}</h4>
+        </div>
+        
+        {% if num > 0  %}
+            <table class="table" border="1">
+                <thead>
+                    <tr class="success">
+                        <th class="text-center text-bold">ID</th>
+                        <th class="text-center text-bold">Identificador</th>
+                        <th class="text-center text-bold">Nombre</th>
+                        <th class="text-center text-bold">Modulo</th>
+                        <th class="text-center text-bold">Path</th>
+                        <th class="text-center text-bold">Fecha Paso</th>
+                        <th class="text-center text-bold">Acción</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for ElementoaPasar in ElementoaPasarAll %}
+                        <tr>
+                            <td class="text-center">{{ElementoaPasar.id}}</td>
+                            <td class="text-center">{{ElementoaPasar.elemento.id}}</td>
+                            <td>{{ElementoaPasar.elemento.nombre}}</td>
+                            {% if (ElementoaPasar.elemento.modulo.texto is defined) %}
+                                <td>{{ElementoaPasar.elemento.modulo.texto}}</td>
+                            {% else %}
+                                <td></td>
+                            {% endif %}
+                            <td>{{ElementoaPasar.elemento.path}}</td>
+                            {% if (ElementoaPasar.fecha != null ) %}
+                                <td>{{ElementoaPasar.fecha}}</td>
+                            {% else %}
+                                <td></td>
+                            {% endif %}
+                            <td class="text-center">
+                            {% if (PasoProd.estado.id == 3) %}
+                                <a href="{{path("quitarElemento",{ "id":ElementoaPasar.id })}}" class="btn btn-danger">Eliminar</a>
+                            {% endif %}
+                            <a href="{{path("verElementoPaso",{ "id":ElementoaPasar.elemento.id })}}" class="btn btn-success">Consulta Pasos</a>
+                            </td>    
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <hr/>
+            {% if PasoProd.estado.id == 3 %}  {# Pendiente de paso/validación #}
+                <a href="{{path("ejecutarPaso",{ "id":PasoProd.id})}}" class="btn btn-success">Ejecutar Paso</a>
+            {% endif %}
+            {% if PasoProd.estado.id == 4 %} {# Pasado ya ha producción #}
+                <a href="{{path("retrocederPaso",{ "id":PasoProd.id })}}" class="btn btn-danger">Retroceder Paso</a>
+            {% endif %}
+            <a href="{{path("queryPasoProd")}}" class="btn btn-success">Volver</a>
+        {% endif %}
+    </div>
+    {% if ( PasoProd.estado.id == 3) %}{# Solamente en estado pendiente se pueden añadir elementos #}
+    <hr/>
+        <div class="container" >
+            <table class="tabla table" border="1">
+            <thead>
+                <tr class="success">
+                    <th class="text-center text-bold" >ID</th>
+                    <th class="text-center text-bold">Nombre</th>
+                    <th class="text-center text-bold">Modulo</th>
+                    <th class="text-center text-bold">Path</th>
+                    <th class="text-center text-bold">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for elemento in ElementosPendientes %}
+                    <tr>
+                        <td class="text-center">{{elemento.id}}</td>
+                        <td>{{elemento.nombre}}</td>
+                        {% if elemento.modulotexto is defined %}
+                            <td>{{elemento.modulotexto}}</td>
+                        {% else %}
+                            <td></td>
+                        {% endif %}
+                        <td>{{elemento.path}}</td>
+                        <td class="text-center">
+                            <a href="{{path("addElemento",{ "id":elemento.id,"pasoprod_id":PasoProd.id })}}" class="btn btn-warning">Añadir</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        </div>
+    {% endif %}
+{% endblock %}

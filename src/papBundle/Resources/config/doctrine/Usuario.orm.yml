@@ -1,0 +1,46 @@
+papBundle\Entity\Usuario:
+    type: entity
+    table: usuario
+    repositoryClass: papBundle\Repository\UsuarioRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        codigo:
+            type: string
+            length: '15'
+        nombre:
+            type: string
+            length: 255
+        apellidos:
+            type: string
+            length: 255
+        perfil:
+            type: string
+            length: '20'
+            nullable: true
+        email:
+            type: string
+            length: 255
+        password:
+            type: string
+            length: 255
+        estado:
+            type: integer
+            
+    manyToOne:
+        modo:
+            targetEntity: Modo
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: elemento
+            joinColumns:
+                modo_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+                
+    lifecycleCallbacks: {  }

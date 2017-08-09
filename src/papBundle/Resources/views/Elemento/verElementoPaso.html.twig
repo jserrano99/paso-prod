@@ -1,0 +1,52 @@
+{% extends "papBundle::layout.html.twig" %} 
+{% block titulo %} VER PASOS A PRODUCCIÓN DEL ELEMENTO 
+    <a href="{{path("queryElemento")}}" class="btn btn-success">Volver</a>
+{% endblock %}
+{% block contenido %}
+    <div class="container">
+        <div class="container">
+            <h4>{{'DATOS DEL ELEMENTO: '}}
+                {{'Identificador: '}}{{Elemento.id}}
+                {{' Nombre: '}}{{Elemento.nombre}}
+                {% if Elemento.modulo.texto is defined %}
+                    {{' Modulo: '}}{{Elemento.modulo.texto}}
+                {% endif %}
+            </h4>
+        </div>
+        
+        {% if num > 0  %}
+            <table class="table" border="1">
+                <thead>
+                    <tr class="success">
+                        <th class="text-center text-bold">Identificador</th>
+                        <th class="text-center text-bold">Título</th>
+                        <th class="text-center text-bold">Estado</th>
+                        <th class="text-center text-bold">Fecha de Paso</th>
+                        <th class="text-center text-bold">Usuario</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for ElementoaPasar in ElementoaPasarAll %}
+                        <tr>
+                            <td class="text-center">{{ElementoaPasar.pasoprod.id}}</td>
+                            <td class="text-center">{{ElementoaPasar.pasoprod.titulo}}</td>
+                            {% if ElementoaPasar.pasoprod.estado.nombre is defined %}
+                                <td class="text-center">{{ElementoaPasar.pasoprod.estado.nombre}}</td>
+                            {% else %}
+                                <td></td>
+                            {% endif %}
+                            <td class="text-center">{{ElementoaPasar.fecha}}</td>
+                            {% if ElementoaPasar.pasoprod.usuario.codigo is defined %}
+                                <td class="text-center">{{ElementoaPasar.pasoprod.usuario.codigo}}</td>
+                            {% else %}
+                                <td></td>
+                            {% endif %}
+                            
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <hr/>
+        {% endif %}
+    </div>
+{% endblock %}

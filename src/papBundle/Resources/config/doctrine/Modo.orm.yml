@@ -1,0 +1,15 @@
+papBundle\Entity\Modo:
+    type: entity
+    table: null
+    repositoryClass: papBundle\Repository\ModoRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        nombre:
+            type: string
+            length: 255
+    lifecycleCallbacks: {  }

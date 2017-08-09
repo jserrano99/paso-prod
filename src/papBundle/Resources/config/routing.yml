@@ -1,0 +1,83 @@
+editModo:
+    path:   /Modo/edit/{id}
+    defaults: { _controller: papBundle:Modo:Edit}
+addParametro:
+    path:   /Parametro/add
+    defaults: { _controller: papBundle:Parametro:Add}
+queryParametro:
+    path:   /Parametro/query
+    defaults: { _controller: papBundle:Parametro:Query}
+editParametro:
+    path:   /Parametro/edit/{id}
+    defaults: { _controller: papBundle:Parametro:Edit}
+login:
+    path: /login
+    defaults: { _controller: papBundle:Usuario:login}
+login_check:
+    path: /login_check
+logout:
+    path: /logout
+
+cambioPassword:
+    path:   /Usuario/cambioPassword/{id}
+    defaults: { _controller: papBundle:Usuario:CambioPassword}
+
+queryUsuario:
+    path:   /Usuario/query
+    defaults: { _controller: papBundle:Usuario:Query}
+addUsuario:
+    path:   /Usuario/add
+    defaults: { _controller: papBundle:Usuario:Add}
+editUsuario:
+    path:   /Usuario/edit/{id}
+    defaults: { _controller: papBundle:Usuario:Edit}
+deleteUsuario:
+    path:   /Usuario/delete/{id}
+    defaults: { _controller: papBundle:Usuario:Delete}
+ejecutarPaso:
+    path:   /ElementoaPasar/paso/{id}
+    defaults: { _controller: papBundle:ElementoaPasar:ejecutarPaso}
+retrocederPaso:
+    path:   /ElementoaPasar/Retroceder/{id}
+    defaults: { _controller: papBundle:ElementoaPasar:retrocederPaso}
+quitarElemento:
+    path:   /ElementoaPasar/quitar/{id}
+    defaults: { _controller: papBundle:ElementoaPasar:quitar}
+addElemento:
+    path:   /ElementoaPasar/add/{id}/{pasoprod_id}
+    defaults: { _controller: papBundle:ElementoaPasar:add}
+queryElementoaPasar:
+    path:   /ElementoaPasar/{id}
+    defaults: { _controller: papBundle:ElementoaPasar:Query}
+deletePasoProd:
+    path:   /PasoProd/Delete/{id}
+    defaults: { _controller: papBundle:PasoProd:Delete}
+updatePasoProd:
+    path:   /PasoProd/Update/{id}
+    defaults: { _controller: papBundle:PasoProd:Update}
+insertPasoProd:
+    path:   /PasoProd/Insert
+    defaults: { _controller: papBundle:PasoProd:Insert}
+queryPasoProd:
+    path:   /PasoProd/Query
+    defaults: { _controller: papBundle:PasoProd:Query}
+
+verElementoPaso:
+    path:   /ElementoPaso/Query/{id}
+    defaults: { _controller: papBundle:Elemento:verPasos}
+
+deleteElemento:
+    path:   /Elemento/Delete/{id}
+    defaults: { _controller: papBundle:Elemento:Delete}
+updateElemento:
+    path:   /Elemento/Update/{id}
+    defaults: { _controller: papBundle:Elemento:Update}
+insertElemento:
+    path:   /Elemento/Insert
+    defaults: { _controller: papBundle:Elemento:Insert}
+queryElemento:
+    path:   /Elemento/Query
+    defaults: { _controller: papBundle:Elemento:Query}
+pap_homepage:
+    path:     /
+    defaults: { _controller: papBundle:Default:index }

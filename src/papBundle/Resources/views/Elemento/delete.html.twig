@@ -1,0 +1,9 @@
+{% extends "papBundle::layout.html.twig" %} 
+{% block titulo %} MODIFICACIÓN DE ELEMENTOS {% endblock %}
+    
+{% block contenido %}
+    <div class="container">
+        {{form_start (form,{'action':'','method':'POST'})}}
+        {{form_end (form)}}
+    </div>
+{% endblock %}

@@ -1,0 +1,47 @@
+papBundle\Entity\Elemento:
+    type: entity
+    table: elemento
+    repositoryClass: papBundle\Repository\ElementoRepository
+    indexes:
+        idx_modulo:
+            columns:
+                - modulo_id
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        nombre:
+            type: string
+            nullable: true
+            length: 255
+            options:
+                fixed: false
+        path:
+            type: string
+            nullable: true
+            length: 255
+            options:
+                fixed: false
+    manyToOne:
+        modulo:
+            targetEntity: Modulo
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: elemento
+            joinColumns:
+                modulo_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+    oneToMany:
+        ElementoaPasar:
+            targetEntity: ElementoaPasar
+            mappedBy: elemento
+            cascade: ["persist"]
+    lifecycleCallbacks: {  }

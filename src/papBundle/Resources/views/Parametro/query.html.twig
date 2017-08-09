@@ -1,0 +1,36 @@
+{% extends "papBundle::layout.html.twig" %} 
+{% block titulo %} CONSULTA PARÁMETROS DE LA APLICACIÓN {% endblock %}
+{% block contenido %}
+    <div class="container">
+        {% for message in app.session.flashbag().get('status') %}
+            <div class="alert alert-success">
+                {{message}}
+            </div>
+        {% endfor %}
+        <a href="{{path("addParametro")}}" class="btn btn-success">Nuevo Parámetro</a>
+        <hr/>
+        
+        <table class="tabla table" border="1">
+            <thead>
+                <tr class="success">
+                    <th class="text-center text-bold">ID</th>
+                    <th class="text-center text-bold">Parámetro</th>
+                    <th class="text-center text-bold">Valor</th>
+                    <th class="text-center text-bold">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for Parametro in ParametroAll %}
+                    <tr>
+                        <td class="text-center">{{Parametro.id}}</td>
+                        <td>{{Parametro.nombre}}</td>
+                        <td>{{Parametro.valor}}</td>
+                        <td>
+                            <a href="{{path("editParametro",{"id":Parametro.id})}}" class="btn btn-warning">Editar</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

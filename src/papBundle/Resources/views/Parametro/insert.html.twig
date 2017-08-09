@@ -1,0 +1,11 @@
+{% extends "papBundle::layout.html.twig" %} 
+{% block titulo %} AÑADIR NUEVO PARAMETRO 
+    <a href="{{path("queryParametro")}}" class="btn btn-success">Volver</a>
+{% endblock %}
+    
+{% block contenido %}
+    <div class="container">
+        {{form_start (form,{'action':'','method':'POST'})}}
+        {{form_end (form)}}
+    </div>
+{% endblock %}

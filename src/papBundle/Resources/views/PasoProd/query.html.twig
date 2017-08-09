@@ -1,0 +1,48 @@
+{% extends "papBundle::layout.html.twig" %} 
+{% block titulo %} CONTROL DE PASOS A PRODUCCIÓN {% endblock %}
+{% block contenido %}
+    <div class="container">
+        {% for message in app.session.flashbag().get('status') %}
+            <div class="alert alert-success">
+                {{message}}
+            </div>
+        {% endfor %}
+        <a href="{{path("insertPasoProd")}}" class="btn btn-success">Nuevo Paso</a>
+        <hr/>
+        
+        <table class="tabla table" border="1">
+            <thead>
+                <tr class="success">
+                    <th class="text-center text-bold">ID</th>
+                    <th class="text-center text-bold">Fecha</th>
+                    <th class="text-center text-bold">titulo</th>
+                    <th class="text-center text-bold">Estado</th>
+                    <th class="text-center text-bold">Usuario</th>
+                    <th class="text-center text-bold">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for PasoProd in PasosProd %}
+                    <tr>
+                        <td class="text-center">{{PasoProd.id}}</td>
+                        <td class="text-center">{{PasoProd.fecha|date('d-m-Y')}}</td>
+                        <td>{{PasoProd.titulo}}</td>
+                        <td class="text-center" >{{PasoProd.estado.nombre}}</td>
+                        <td class="text-center">{{PasoProd.usuario.codigo}}</td>
+                        <td class="text-center">
+                        <a href="{{path("updatePasoProd",{ "id":PasoProd.id })}}" class="btn btn-success">Editar</a>
+                        {% if PasoProd.estado.id == 4 %}
+                            <a href="{{path("retrocederPaso",{ "id":PasoProd.id })}}" class="btn btn-danger">Retroceder</a>
+                            <a href="{{path("queryElementoaPasar",{ "id":PasoProd.id })}}" class="btn btn-info">Elementos</a>
+                        {% else %}    
+                            <a href="{{path("deletePasoProd",{ "id":PasoProd.id })}}" class="btn btn-warning">Eliminar</a>
+                            <a href="{{path("queryElementoaPasar",{ "id":PasoProd.id })}}" class="btn btn-success">Añadir</a>
+                        {% endif %}
+                        </td>
+                        
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

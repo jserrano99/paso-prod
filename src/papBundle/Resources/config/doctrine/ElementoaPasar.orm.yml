@@ -1,0 +1,52 @@
+papBundle\Entity\ElementoaPasar:
+    type: entity
+    table: elementoapasar
+    indexes:
+        idx_pasoProd:
+            columns:
+                - pasoprod_id
+        idx_elemento:
+            columns:
+                - elemento_id
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        itpaso:
+            type: boolean
+            nullable: true
+        fecha:
+            type: string
+            length: 50
+            nullable: true
+            
+    manyToOne:
+        pasoprod:
+            targetEntity: PasoProd
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: ElementoaPasar
+            joinColumns:
+                pasoprod_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+    
+        elemento:
+            targetEntity: Elemento
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: ElementoaPasar
+            joinColumns:
+                elemento_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+        
+    lifecycleCallbacks: {  }

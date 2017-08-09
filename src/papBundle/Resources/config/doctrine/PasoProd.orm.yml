@@ -1,0 +1,65 @@
+papBundle\Entity\PasoProd:
+    type: entity
+    table: pasoprod
+    repositoryClass: papBundle\Repository\PasoProdRepository
+    indexes:
+        idx_estado:
+            columns:
+                - estado_id
+        idx_usuario:
+            columns:
+                - usuario_id
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        fecha:
+            type: date
+            nullable: true
+        titulo:
+            type: string 
+            nullable: true
+            length: 255
+        comentario:
+            type: text
+            nullable: true
+            length: 65535
+            options:
+                fixed: false
+    manyToOne:
+        estado:
+            targetEntity: Estado
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                estado_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+        usuario:
+            targetEntity: Usuario
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                usuario_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+    oneToMany:
+        PasoProdEncargo:
+            targetEntity: PasoProdEncargo 
+            mappedBy: pasoprod
+            cascade: ["persist"]
+        ElementoaPasar:
+            targetEntity: ElementoaPasar
+            mappedBy: pasoprod
+            cascade: ["persist"]
+    lifecycleCallbacks: {  }

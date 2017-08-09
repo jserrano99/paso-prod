@@ -1,0 +1,14 @@
+{% extends "papBundle::layout.html.twig" %} 
+{% block titulo %} MODIFICACIÓN/CONSULTA PASO A PRODUCCIÓN 
+   <a href="{{path("queryPasoProd")}}" class="btn btn-success">Volver</a>
+{% endblock %}
+    
+{% block contenido %}
+    <div class="container">
+        {{form_start (form,{'action':'','method':'POST'})}}
+        <label>Encargos que Soluciona</label>
+            {{form_widget(form.encargos,{"value":encargos})}}
+        {{form_end (form)}}
+    </div>
+    <div class="clearfix"> </div>
+{% endblock %}

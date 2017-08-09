@@ -1,0 +1,41 @@
+papBundle\Entity\PasoProdEncargo:
+    type: entity
+    table: pasoprodencargo
+    indexes:
+        idx_pasoprod:
+            columns:
+                - pasoprod_id
+        idx_encargo:
+            columns:
+                - encargo_id
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            generator:
+                strategy: IDENTITY
+    manyToOne:
+        pasoprod:
+            targetEntity: PasoProd
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: PasoProdEncargo
+            joinColumns:
+                pasoprod_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+        encargo:
+            targetEntity: Encargo
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: PasoProdEncargo
+            joinColumns:
+                encargo_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

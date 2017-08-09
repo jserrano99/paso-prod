@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="PasoProdEncargo" table="pasoprodencargo">
+    <indexes>
+      <index name="idx_pasoprod" columns="pasoprod_id"/>
+      <index name="idx_encargo" columns="encargo_id"/>
+    </indexes>
+    <id name="id" type="integer" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="nmencargo" type="integer" column="nmencargo" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <many-to-one field="pasoprod" target-entity="PasoProd" fetch="LAZY">
+      <join-columns>
+        <join-column name="pasoprod_id" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="encargo" target-entity="Encargo" fetch="LAZY">
+      <join-columns>
+        <join-column name="encargo_id" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>
